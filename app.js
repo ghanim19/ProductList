@@ -22,16 +22,26 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchData();
         }
     });
+
     function fetchData() {
-        fetch(`${apiUrl}?limit=${productsPerPage}&skip=${(currentPage - 1) * productsPerPage}`)
-            .then(response => response.json())
-            .then(data => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `${apiUrl}?limit=${productsPerPage}&skip=${(currentPage - 1) * productsPerPage}`, true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
                 totalProducts = data.total;
                 renderProducts(data.products);
                 updatePagination();
-            })
-            .catch(error => console.error('Error fetching data:', error));
+            } else {
+                console.error('Error fetching data:', xhr.statusText);
+            }
+        };
+        xhr.onerror = function() {
+            console.error('Network error.');
+        };
+        xhr.send();
     }
+
     function renderProducts(products) {
         productList.innerHTML = '';
         products.forEach(product => {
@@ -59,10 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
     function updatePagination() {
         pageInfo.textContent = `Page ${currentPage}`;
         prevButton.disabled = currentPage === 1;
         nextButton.disabled = currentPage === Math.ceil(totalProducts / productsPerPage);
     }
+
     fetchData();
 });
