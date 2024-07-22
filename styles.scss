@@ -1,0 +1,105 @@
+$font-family: Arial, sans-serif;
+$background-color: #f4f4f4;
+$primary-color: #333;
+$secondary-color: #666;
+$highlight-color: #e91e63;
+$button-bg-color: #333;
+$button-text-color: #fff;
+$border-color: #ddd;
+$box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+body {
+    font-family: $font-family;
+    background-color: $background-color;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: $primary-color;
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    max-width: 200px;
+    box-shadow: $box-shadow;
+    text-align: center;
+    transition: transform 0.2s;
+    position: relative;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 18px;
+        color: $primary-color;
+    }
+
+    p {
+        font-size: 14px;
+        color: $secondary-color;
+        margin: 5px 0;
+    }
+
+    .price {
+        font-size: 16px;
+        color: $highlight-color;
+        font-weight: bold;
+    }
+
+    .details {
+        display: none;
+        font-size: 12px;
+        color: #555;
+        margin-top: 10px;
+    }
+
+    .show-details {
+        background-color: $button-bg-color;
+        color: $button-text-color;
+        border: none;
+        padding: 5px 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+}
+
+#pagination {
+    text-align: center;
+    margin-top: 20px;
+
+    button {
+        padding: 10px 20px;
+        margin: 0 5px;
+        border: none;
+        background-color: $button-bg-color;
+        color: $button-text-color;
+        cursor: pointer;
+        border-radius: 5px;
+
+        &:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+    }
+}
